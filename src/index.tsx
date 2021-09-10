@@ -1,7 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
+import { render } from 'react-dom';
+// @ts-ignore
+// 1: some issue with fileimporting that you cant import tsx files.
+// Omitting rule until I can find out something interesting with this.
+import App from './components/App.tsx';
 
-
-ReactDOM.render(<App />, document.getElementById('root'));
-
+const rootElement = document.getElementById('root');
+render(<App />, rootElement);
