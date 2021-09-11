@@ -4,14 +4,14 @@ import { TPhoto, TPhotoList } from './types.ts';
 // @ts-ignore #1
 import Photo from './Photo.tsx';
 
-const PhotoList = ({ photoList }: { photoList: TPhotoList }) => {
+const PhotoList = ({ list }: { list: TPhotoList }) => (
   <ul>
     {
-      photoList.map((photo: TPhoto) => (
+      list.map((photo: TPhoto) => (
         <Photo photo={photo} />
       ))
     }
-  </ul>;
-};
+  </ul>
+);
 
 export default PhotoList;
