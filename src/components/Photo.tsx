@@ -9,7 +9,7 @@ const Photo = ({ photo }: { photo: TPhoto }) => {
   const {
     title, date, hdPicture, details, copyright, type,
   } = photo;
-  console.log('PROPS:', photo);
+  // console.log('PROPS:', photo);
   const [year, month, day] = date.split('-');
   const imageSettings = {
     height: '300',
@@ -20,14 +20,16 @@ const Photo = ({ photo }: { photo: TPhoto }) => {
       <div className="card-image">
         <img src={hdPicture} alt={type} width={imageSettings.width} height={imageSettings.height} />
       </div>
-      <div className="card-title">
-        {`${title} captured on ${month},${day},${year}`}
-      </div>
-      <div className="card-details">
-        {details}
-      </div>
-      <div className="card-copyright">
-        {`© ${year} ${copyright} `}
+      <div className="card-text">
+        <div className="card-title">
+          {`${title} captured on: ${month}/${day}/${year}`}
+        </div>
+        <div className="card-details">
+          {details}
+        </div>
+        <div className="card-copyright">
+          {`© ${year} ${copyright} `}
+        </div>
       </div>
       <div className="like-button">
         <button type="button">Like</button>
