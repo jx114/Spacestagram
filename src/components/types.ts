@@ -1,7 +1,7 @@
 export type TPhoto = {
   id: number;
   title: string;
-  date: Date;
+  date: string;
   liked: boolean;
   thumbnail: string;
   hdPicture: string;
@@ -15,7 +15,7 @@ export type TPhotoList = {
 
 export type NasaPhoto = {
   copyright: string;
-  date: Date;
+  date: string;
   explanation: string;
   hdurl: string;
   mediaType: string;
