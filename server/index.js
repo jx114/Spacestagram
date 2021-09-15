@@ -16,6 +16,7 @@ mongoose
 // Middleware
 app.use(morgan('dev'));
 app.use(cors());
+app.use(express.json());
 
 // Serve
 app.use(express.static(path.join(__dirname, '../build')));
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 app.get('/', (req, res) => {
   res.send(';-; not rendering!');
 });
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}, dirname: ${__dirname}`);
 });
