@@ -13,7 +13,6 @@ mongoose
   .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('successfully connected to MongoDB!'));
 
-// Parse
 // Middleware
 app.use(morgan('dev'));
 app.use(cors());
