@@ -1,13 +1,22 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const port = 3017;
-const path = require('path');
+const url = 'mongodb://localhost/spacestagram';
+
+// Database
+mongoose
+  .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('successfully connected to MongoDB!'));
 
 // Parse
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// Middleware
+app.use(morgan('dev'));
+app.use(cors());
 
 // Serve
 app.use(express.static(path.join(__dirname, '../build')));

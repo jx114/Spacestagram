@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // @ts-ignore
-// 1: some issue with file importing that you cant import tsx files.
+// 1: some issue with file importing that you cant import tsx/ts files.
 import { TPhotoList } from './types.ts';
 // Components
 // @ts-ignore #1
