@@ -1,15 +1,16 @@
-const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const path = require('path');
+import fetch from 'node-fetch';
+import express from 'express';
+import morgan from 'morgan';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import path from 'path';
 
 const app = express();
 const port = 3017;
 const url = 'mongodb://localhost/spacestagram';
-
-const { nasaApiKey } = require('../info.ts');
-
+// const apiKey = process.env.REACT_APP_NASA_API_KEY;
+const apiKey = 'X5YJg98pmuUMEC5tAn385uwvfDX50lID0eqIkubk';
+const dirname = '/Users/jacky/Desktop/Workspace/shopify/spacestagram/server';
 // Database
 mongoose
   .connect(url)
@@ -25,16 +26,31 @@ app.use(cors());
 app.use(express.json());
 
 // Serve
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(dirname, '../build')));
 
 // Routes
 app.get('/', (req, res) => {
   res.send(';-; not rendering!');
 });
 
-// app.get('/nasaAPOD', (req, res) => {
+const date = new Date();
+date.setDate(date.getDate() - 7);
+console.log('DATE DATE DATE', typeof date);
+const strDate = JSON.stringify(date);
+const startDate = strDate.slice(0, 9);
+console.log('START START START', startDate);
 
-// });
+// console.log('SLICE SLICE SLICE', date);
+
+const getAPODS = async () => {
+  console.log('APIKEY', apiKey);
+  await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
+    .then((response) => response.json())
+    .then((data) => console.log('BUTT BUTT BUTT', data))
+    .catch((err) => console.log('ERR ERR ERR', err));
+};
+getAPODS();
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}, dirname: ${__dirname}`);
+  console.log(`Example app listening at http://localhost:${port}`);
 });
