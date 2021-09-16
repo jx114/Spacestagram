@@ -37,14 +37,14 @@ const date = new Date();
 date.setDate(date.getDate() - 7);
 console.log('DATE DATE DATE', typeof date);
 const strDate = JSON.stringify(date);
-const startDate = strDate.slice(0, 9);
+const startDate = strDate.slice(1, 11);
 console.log('START START START', startDate);
 
 // console.log('SLICE SLICE SLICE', date);
 
 const getAPODS = async () => {
   console.log('APIKEY', apiKey);
-  await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
+  await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`)
     .then((response) => response.json())
     .then((data) => console.log('BUTT BUTT BUTT', data))
     .catch((err) => console.log('ERR ERR ERR', err));
