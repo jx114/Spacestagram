@@ -32,9 +32,10 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 // Routes
 app.get('/', (req, res) => {
-  getAPODS();
   res.send(';-; not rendering!');
 });
+
+getAPODS();
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
