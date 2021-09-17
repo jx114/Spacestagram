@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
@@ -7,12 +7,13 @@ const APODSchema = new Schema(
     title: String,
     date: String,
     liked: Boolean,
-    thumbnail: String,
-    hdPicture: String,
-    details: String,
+    url: String,
+    hdurl: String,
+    explanation: String,
     copyright: String,
-    type: String,
+    media_type: String,
+    service_version: String,
   },
 );
 
-module.exports = mongoose.model('APOD', APODSchema);
+export default mongoose.model('APOD', APODSchema);

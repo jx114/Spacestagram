@@ -5,6 +5,12 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
+// eslint-disable-next-line import/extensions
+import APOD from './models/APOD.js';
+
+// Utils
+// eslint-disable-next-line import/extensions
+import getStartDate from './utils/index.js';
 
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -36,20 +42,25 @@ app.get('/', (req, res) => {
   res.send(';-; not rendering!');
 });
 
-const date = new Date();
-date.setDate(date.getDate() - 7);
-console.log('DATE DATE DATE', typeof date);
-const strDate = JSON.stringify(date);
-const startDate = strDate.slice(1, 11);
-console.log('START START START', startDate);
-
-// console.log('SLICE SLICE SLICE', date);
-
 const getAPODS = async () => {
+  const startDate = getStartDate();
   console.log('APIKEY', apiKey);
   await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`)
     .then((response) => response.json())
-    .then((data) => console.log('BUTT BUTT BUTT', data))
+    .then((data) => {
+      const apods = data.reverse();
+      apods.forEach(async (apod) => {
+        await APOD.findOneAndUpdate(
+          apod,
+          apod,
+          {
+            new: true,
+            upsert: true,
+          },
+        )
+          .catch((err) => console.log('DATA ERR:', err));
+      });
+    })
     .catch((err) => console.log('ERR ERR ERR', err));
 };
 getAPODS();
