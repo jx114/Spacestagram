@@ -9,5 +9,5 @@ export default (input: NasaPhoto): TPhoto => ({
   thumbnail: input.url,
   hdPicture: input.hdurl,
   details: input.explanation,
-  type: input.mediaType,
+  type: input.media_type,
 });
