@@ -1,17 +1,14 @@
-/* eslint-disable import/extensions */
-import express from 'express';
-import morgan from 'morgan';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+const express = require('express');
+const path = require('path');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
-import controllers from './controllers/APOD.js';
-import router from './routes/api/index.js';
+const controllers = require('./controllers/APOD');
+const router = require('./routes/api/index');
 
 const { getAPODS } = controllers;
-// eslint-disable-next-line no-underscore-dangle
-const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const app = express();
 const port = 3017;
 const url = 'mongodb://localhost/spacestagram';
@@ -36,13 +33,11 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../build')));
 
 // Routes
-const { readAPODS, putLikes } = router;
 app.get('/', (req, res) => {
   res.send(';-; not rendering!');
 });
 
-app.use('/api/readAPODS', readAPODS);
-app.use('/api/putLikes', putLikes);
+app.use('/api', router);
 
 // API
 /// /  Retrieves data from NASA Api on every server start up and saves to db

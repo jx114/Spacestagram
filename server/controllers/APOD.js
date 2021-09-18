@@ -1,20 +1,20 @@
-import fetch from 'node-fetch';
+const axios = require('axios');
 // eslint-disable-next-line import/extensions
-import APOD from '../models/APOD.js';
+const APOD = require('../models/APOD');
 
 // Utils
 // eslint-disable-next-line import/extensions
-import getStartDate from '../utils/index.js';
+const getStartDate = require('../utils');
 
 const apiKey = 'X5YJg98pmuUMEC5tAn385uwvfDX50lID0eqIkubk';
 
-export default {
+module.exports = {
   // Getting APODS from nasaAPI
   getAPODS: async function getAPODS() {
     try {
       const startDate = getStartDate();
-      const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`);
-      const apods = await response.json();
+      const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`);
+      const apods = response.data;
       apods.forEach(async (apod) => {
         await APOD.findOneAndUpdate(
           apod,
