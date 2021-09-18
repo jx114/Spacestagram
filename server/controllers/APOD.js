@@ -9,7 +9,7 @@ import getStartDate from '../utils/index.js';
 const apiKey = 'X5YJg98pmuUMEC5tAn385uwvfDX50lID0eqIkubk';
 
 export default {
-  // Getting APODS from nasa
+  // Getting APODS from nasaAPI
   getAPODS: async function getAPODS() {
     try {
       const startDate = getStartDate();
