@@ -5,8 +5,9 @@ import cors from 'cors';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 // eslint-disable-next-line import/extensions
-import getAPODS from './controllers/APOD.js';
+import controllers from './controllers/APOD.js';
 
+const { getAPODS } = controllers;
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -14,6 +15,7 @@ const port = 3017;
 const url = 'mongodb://localhost/spacestagram';
 
 // Database
+// import and clean
 mongoose
   .connect(url)
   .then(() => console.log('successfully connected to MongoDB!'));
@@ -22,6 +24,7 @@ const db = mongoose.connection;
 db.once('connect', () => {
   console.log(`connected to MongoDB ${db.name} at ${db.host}:${db.port}`);
 });
+
 // Middleware
 app.use(morgan('dev'));
 app.use(cors());
