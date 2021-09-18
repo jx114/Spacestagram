@@ -23,7 +23,6 @@ function App() {
   useEffect(() => {
     axios.get('/api/readAPODS')
       .then(({ data }) => {
-        console.log('DATA DATA DATA', data);
         const formatted = data.map((apod: any) => formatFromNasa(apod));
         console.log('FORMATTED FORMATTED FORMATTED', formatted);
         setList(formatted);
