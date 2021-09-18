@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -16,4 +16,4 @@ const APODSchema = new Schema(
   },
 );
 
-export default mongoose.model('APOD', APODSchema);
+module.exports = mongoose.model('APOD', APODSchema);

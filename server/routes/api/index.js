@@ -1,13 +1,9 @@
-import express from 'express';
-// eslint-disable-next-line import/extensions
-import apodCtrl from '../../controllers/APOD.js';
+const express = require('express');
 
-const router = express.Router;
+const router = express.Router();
+const apodCtrl = require('../../controllers/APOD');
 
-// make dem routes boi
-router.get('/', apodCtrl.readAPODS);
-router.put('/', apodCtrl.putLikes);
+router.get('/readAPODS', apodCtrl.readAPODS);
+router.post('/patchLikes', apodCtrl.patchLikes);
 
-export default {
-  router,
-};
+module.exports = router;
