@@ -16,10 +16,23 @@ module.exports = {
       const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`);
       const apods = response.data;
       apods.forEach(async (apod) => {
-        await APOD.create(apod);
+        const updated = await APOD.create(apod);
+        const {
+          // eslint-disable-next-line camelcase
+          title, date, liked, url, hdurl, explanation, media_type, service_version,
+        } = updated;
         await APOD.findOneAndUpdate(
           apod,
-          apod,
+          {
+            title,
+            date,
+            liked,
+            url,
+            hdurl,
+            explanation,
+            media_type,
+            service_version,
+          },
           {
             new: true,
             upsert: true,
