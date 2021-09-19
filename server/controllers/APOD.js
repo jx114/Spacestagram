@@ -34,7 +34,7 @@ module.exports = {
     try {
       const apods = await APOD.find({})
         .sort({ date: -1 })
-        .limit(7);
+        .limit(12);
       res.json(apods);
     } catch (err) {
       res.json({ err });
