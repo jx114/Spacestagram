@@ -6,7 +6,7 @@ const APODSchema = new Schema(
   {
     title: String,
     date: String,
-    liked: Boolean,
+    liked: { type: Boolean, default: false },
     url: String,
     hdurl: String,
     explanation: String,
