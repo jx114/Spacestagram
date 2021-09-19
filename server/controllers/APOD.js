@@ -16,6 +16,7 @@ module.exports = {
       const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`);
       const apods = response.data;
       apods.forEach(async (apod) => {
+        console.log('APOD APOD APOD', apod);
         await APOD.findOneAndUpdate(
           apod,
           apod,
@@ -32,7 +33,7 @@ module.exports = {
   // Getting APODS from db
   readAPODS: async function readAPODS(req, res) {
     try {
-      const apods = await APOD.find({})
+      const apods = await APOD.find({ media_type: 'image' })
         .sort({ date: -1 })
         .limit(12);
       res.json(apods);
