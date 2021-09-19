@@ -18,7 +18,8 @@ export type NasaPhoto = {
   date: string;
   explanation: string;
   hdurl: string;
-  mediaType: string;
+  // eslint-disable-next-line camelcase
+  media_type: string;
   title: string;
   url: string;
   id: string;

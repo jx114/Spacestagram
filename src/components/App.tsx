@@ -8,7 +8,7 @@ import { Container, Typography } from '@mui/material';
 
 // @ts-ignore
 // 1: some issue with file importing that you cant import tsx/ts files.
-import { TPhotoList } from './types.ts';
+import { TPhotoList, NasaPhoto } from './types.ts';
 
 // Components
 // @ts-ignore #1
@@ -26,8 +26,8 @@ export default function App() {
   const getPhotos = () => {
     axios.get('/api/readAPODS')
       .then(({ data }) => {
-        const formatted = data.map((apod: any) => formatFromNasa(apod));
-        console.log('FORMATTED FORMATTED FORMATTED', formatted.data);
+        const formatted = data.map((apod: NasaPhoto) => formatFromNasa(apod));
+        console.log('FORMATTED FORMATTED FORMATTED', formatted);
         setList(formatted);
       })
       .catch((err) => {
@@ -35,6 +35,10 @@ export default function App() {
       });
   };
   useEffect(getPhotos, []);
+  // const imageClick = (id: String) => {
+  // };
+  // const likeClick = (id: String) => {
+  // };
 
   return (
     <div className="App">
@@ -44,7 +48,7 @@ export default function App() {
             <Container maxWidth="lg">
               <Typography variant="h2" className="title">Spacestagram</Typography>
               <div className="list-card">
-                <PhotoList list={list} />
+                <PhotoList list={list} imageClick="placeholder" likeClick="placeholder" />
               </div>
             </Container>
           </>
