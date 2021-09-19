@@ -21,4 +21,5 @@ export type NasaPhoto = {
   mediaType: string;
   title: string;
   url: string;
+  id: string;
 };

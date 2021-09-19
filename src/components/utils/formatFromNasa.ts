@@ -3,6 +3,8 @@
 import { TPhoto, NasaPhoto } from '../types.ts';
 
 export default (input: NasaPhoto): TPhoto => ({
+  // eslint-disable-next-line no-underscore-dangle
+  id: input._id,
   title: input.title,
   copyright: input.copyright,
   date: input.date,
