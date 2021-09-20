@@ -56,13 +56,16 @@ module.exports = {
   },
   // Updating APODS' likes for persistent data
   patchLikes: async function patchLikes(req, res) {
-    const { _id, liked, title } = req.body;
+    const { liked } = req.body;
+    console.log('PATCH BODY', liked);
+    const { id } = req.params;
+    console.log('PATCH PARAMS', id);
     try {
       await APOD.findOneAndUpdate(
-        { _id },
+        { id },
         { liked },
       );
-      res.send(`Updated like on photo with the id:${_id} and title:${title}`);
+      res.send(`Updated like on photo with the id:${id}`);
     } catch (err) {
       res.json({ err });
     }
