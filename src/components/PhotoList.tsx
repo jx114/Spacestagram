@@ -5,10 +5,24 @@ import { TPhoto, TPhotoList } from './types.ts';
 // @ts-ignore #1
 import Photo from './Photo.tsx';
 
-const PhotoList = ({ list }: { list: TPhotoList }) => (
+export type TProps = {
+  list: TPhotoList,
+  // eslint-disable-next-line no-unused-vars
+  imageClick?: (id: string, imageId: string) => void,
+}
+
+const PhotoList = (
+  {
+    list, imageClick,
+  }: TProps,
+) => (
   <ImageList cols={3} rowHeight="auto">
     {list.map((item: TPhoto) => (
-      <Photo key={item.id} photo={item} />
+      <Photo
+        key={item.id}
+        photo={item}
+        imageClick={imageClick}
+      />
     ))}
   </ImageList>
 );

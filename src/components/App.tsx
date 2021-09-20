@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -5,29 +7,27 @@ import '@fontsource/roboto/700.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography } from '@mui/material';
-
-// @ts-ignore
-// 1: some issue with file importing that you cant import tsx/ts files.
-import { TPhotoList, NasaPhoto } from './types.ts';
+import { NasaPhoto } from './types';
 
 // Components
-// @ts-ignore #1
-import PhotoList from './PhotoList.tsx';
+import PhotoList from './PhotoList';
+import ImageViewer from './ImageViewer';
 
 // Util
-// @ts-ignore #1
-import formatFromNasa from './utils/formatFromNasa.ts';
+import formatFromNasa from './utils/formatFromNasa';
 
-export interface IState {
-  photoList: TPhotoList,
-}
 export default function App() {
-  const [list, setList] = useState<IState['photoList']>([]);
+  const [list, setList] = useState([]);
+  const [open, setOpen] = useState(false);
+  // const [activePhoto, setActivePhoto] = useState('');
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const getPhotos = () => {
     axios.get('/api/readAPODS')
       .then(({ data }) => {
         const formatted = data.map((apod: NasaPhoto) => formatFromNasa(apod));
-        console.log('FORMATTED FORMATTED FORMATTED', formatted);
         setList(formatted);
       })
       .catch((err) => {
@@ -35,8 +35,11 @@ export default function App() {
       });
   };
   useEffect(getPhotos, []);
-  // const imageClick = (id: String) => {
-  // };
+  // eslint-disable-next-line no-unused-vars
+  const imageClick = (id: string) => {
+    handleOpen();
+    console.log(id);
+  };
   // const likeClick = (id: String) => {
   // };
 
@@ -47,8 +50,9 @@ export default function App() {
           <>
             <Container maxWidth="lg">
               <Typography variant="h2" className="title">Spacestagram</Typography>
+              <ImageViewer open={open} onClose={handleClose} photo={list[0]} onOpen={handleOpen} />
               <div className="list-card">
-                <PhotoList list={list} imageClick="placeholder" likeClick="placeholder" />
+                <PhotoList list={list} imageClick={imageClick} />
               </div>
             </Container>
           </>

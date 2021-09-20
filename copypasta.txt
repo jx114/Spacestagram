@@ -1,0 +1,43 @@
+ // const { id, title, date, liked, thumbnail, hdPicture, details, copyright, type } = photo;
+  const {
+    title, date, details, copyright, type, hdPicture,
+  } = photo;
+  // console.log('PROPS:', photo);
+  const [year, month, day] = date.split('-');
+  const imageSettings = {
+    height: '300',
+    width: '350',
+  };
+
+<div className="card">
+      <div className="card-image">
+        <img src={hdPicture} alt={type} width={imageSettings.width} height={imageSettings.height} />
+      </div>
+      <div className="card-text">
+        <div className="card-title">
+          {`${title} captured on: ${month}/${day}/${year}`}
+        </div>
+        <div className="card-details">
+          {details}
+        </div>
+        {
+          copyright
+            ? (
+              <div className="card-copyright">
+                {`© ${year} ${copyright} `}
+              </div>
+            )
+            : <></>
+        }
+      </div>
+      <div className="like-button">
+        <button type="button">Like</button>
+      </div>
+    </div>
+
+<img
+          src={`${item.thumbnail}?w=164&h=164&fit=crop&auto=format`}
+          srcSet={`${item.thumbnail}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+          alt={item.title}
+          loading="lazy"
+        />
