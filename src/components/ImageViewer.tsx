@@ -36,8 +36,8 @@ const ImageViewer = ({
               srcSet={hdPicture}
               alt={title}
               loading="lazy"
-              width="95%"
-              height="95%"
+              width="100%"
+              height="100%"
             />
             <Grid
               container
@@ -51,9 +51,24 @@ const ImageViewer = ({
                 </Typography>
               </Grid>
             </Grid>
-            <Typography id="modal-modal-date" sx={{ mt: 2 }}>
-              {`Captured on: ${month}/${day}/${year}`}
-            </Typography>
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="center"
+            >
+              <Grid item xs={8}>
+                <Typography id="modal-modal-date" sx={{ mt: 2 }}>
+                  {`Captured on: ${month}/${day}/${year}`}
+                </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <FavoriteBorderIcon />
+              </Grid>
+              <Grid item xs={2}>
+                <ShareIcon />
+              </Grid>
+            </Grid>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               {details}
             </Typography>
@@ -73,12 +88,6 @@ const ImageViewer = ({
                     )
                     : <></>
                 }
-              </Grid>
-              <Grid item xs={2}>
-                <FavoriteBorderIcon />
-              </Grid>
-              <Grid item xs={2}>
-                <ShareIcon />
               </Grid>
             </Grid>
           </Container>

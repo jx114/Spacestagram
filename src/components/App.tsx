@@ -20,7 +20,6 @@ export default function App() {
   const [list, setList] = useState([]);
   const [open, setOpen] = useState(false);
   const [activePhoto, setActivePhoto] = useState('');
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -35,7 +34,6 @@ export default function App() {
       });
   };
   useEffect(getPhotos, []);
-  // eslint-disable-next-line no-unused-vars
   const imageClick = (id: string) => {
     list.forEach((element: any) => {
       if (id === element.id) {
@@ -44,7 +42,12 @@ export default function App() {
     });
     handleOpen();
   };
-  // const likeClick = (id: String) => {
+  // const likeClick = (id: string) => {
+  //   list.forEach((element: any) => {
+  //     if (id === element.id) {
+
+  //     }
+  //   });
   // };
   return (
     <div className="App">

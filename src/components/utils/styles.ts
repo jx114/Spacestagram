@@ -9,7 +9,8 @@ const styles = {
     bgcolor: 'rgb(166,166,166, .9)',
     boxShadow: 24,
     p: 4,
-    'margin-top': '200px',
+    margin: '50px',
+    border: '50px',
   },
   modal: `position: fixed;
   z-index: 1300;
