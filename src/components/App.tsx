@@ -19,7 +19,7 @@ import formatFromNasa from './utils/formatFromNasa';
 export default function App() {
   const [list, setList] = useState([]);
   const [open, setOpen] = useState(false);
-  // const [activePhoto, setActivePhoto] = useState('');
+  const [activePhoto, setActivePhoto] = useState('');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -37,12 +37,15 @@ export default function App() {
   useEffect(getPhotos, []);
   // eslint-disable-next-line no-unused-vars
   const imageClick = (id: string) => {
+    list.forEach((element: any) => {
+      if (id === element.id) {
+        setActivePhoto(element);
+      }
+    });
     handleOpen();
-    console.log(id);
   };
   // const likeClick = (id: String) => {
   // };
-
   return (
     <div className="App">
       {list
@@ -50,7 +53,18 @@ export default function App() {
           <>
             <Container maxWidth="lg">
               <Typography variant="h2" className="title">Spacestagram</Typography>
-              <ImageViewer open={open} onClose={handleClose} photo={list[0]} onOpen={handleOpen} />
+              {
+                activePhoto
+                  ? (
+                    <ImageViewer
+                      open={open}
+                      onClose={handleClose}
+                      photo={activePhoto}
+                      onOpen={handleOpen}
+                    />
+                  )
+                  : <></>
+              }
               <div className="list-card">
                 <PhotoList list={list} imageClick={imageClick} />
               </div>
