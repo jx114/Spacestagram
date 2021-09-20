@@ -11,6 +11,8 @@ const styles = {
     p: 4,
     margin: '50px',
     border: '50px',
+    borderColor: 'transparent',
+    borderRadius: '25px',
   },
   modal: `position: fixed;
   z-index: 1300;

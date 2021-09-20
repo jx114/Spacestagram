@@ -7,6 +7,7 @@ import '@fontsource/roboto/700.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography } from '@mui/material';
+
 import { NasaPhoto } from './types';
 
 // Components
@@ -42,13 +43,6 @@ export default function App() {
     });
     handleOpen();
   };
-  // const likeClick = (id: string) => {
-  //   list.forEach((element: any) => {
-  //     if (id === element.id) {
-
-  //     }
-  //   });
-  // };
   return (
     <div className="App">
       {list
@@ -64,6 +58,7 @@ export default function App() {
                       onClose={handleClose}
                       photo={activePhoto}
                       onOpen={handleOpen}
+                      getPhotos={getPhotos}
                     />
                   )
                   : <></>

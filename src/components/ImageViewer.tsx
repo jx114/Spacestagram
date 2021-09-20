@@ -1,10 +1,12 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import * as React from 'react';
+import axios from 'axios';
 import {
-  Box, Typography, ModalUnstyled, Container, Grid, styled,
+  Box, Typography, ModalUnstyled, Container, Grid, styled, Snackbar, Alert,
 } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import styles from './utils/styles';
 
@@ -12,14 +14,49 @@ const { box, modal, backdrop } = styles;
 const Modal = styled(ModalUnstyled)`${modal}`;
 const Backdrop = styled('div')`${backdrop}`;
 
-const ImageViewer = ({
-  open, onClose, photo,
-}: any) => {
-  // const { id, title, date, liked, thumbnail, hdPicture, details, copyright, type } = photo;
+export default function ImageViewer({
+  open, onClose, photo, getPhotos,
+}: any) {
+  console.log('PHOTO PHOTO', photo);
+  const [like, setLike] = React.useState(false);
+  const [snack, setSnack] = React.useState(false);
+
+  const openSnack = () => {
+    setSnack(true);
+  };
+  const closeSnack = () => {
+    setSnack(false);
+  };
+
+  const likeClick = (id: string) => {
+    if (like === true) {
+      setLike(false);
+      console.log('FALSE', like);
+    } else {
+      setLike(true);
+      console.log('TRUE', like);
+    }
+    const url = `/api/patchLikes/${id}`;
+    axios.patch(url, { liked: like })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  React.useEffect(getPhotos, [like]);
+
   const {
-    title, details, copyright, hdPicture, date,
+    title, details, copyright, hdPicture, date, id, liked,
   } = photo;
+
   const [year, month, day] = date.split('-');
+
+  console.log('STATE LIKED LIKED', like);
+  console.log('PHOTO LIKED LIKED', liked);
+
   return (
     <div>
       <Modal
@@ -63,10 +100,23 @@ const ImageViewer = ({
                 </Typography>
               </Grid>
               <Grid item xs={2}>
-                <FavoriteBorderIcon />
+                {
+                  like
+                    ? (<FavoriteIcon sx={{ color: 'red' }} onClick={() => (likeClick(id))} />)
+                    : (<FavoriteBorderIcon onClick={() => (likeClick(id))} />)
+                }
               </Grid>
               <Grid item xs={2}>
-                <ShareIcon />
+                <ShareIcon onClick={() => {
+                  navigator.clipboard.writeText(hdPicture);
+                  openSnack();
+                }}
+                />
+                <Snackbar open={snack} autoHideDuration={3000} onClose={closeSnack}>
+                  <Alert severity="info" onClose={closeSnack} sx={{ width: '100%' }}>
+                    Copied link to clipboard!
+                  </Alert>
+                </Snackbar>
               </Grid>
             </Grid>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -95,6 +145,4 @@ const ImageViewer = ({
       </Modal>
     </div>
   );
-};
-
-export default ImageViewer;
+}
