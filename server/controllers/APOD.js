@@ -13,31 +13,35 @@ module.exports = {
   getAPODS: async function getAPODS() {
     try {
       const startDate = getStartDate();
+      console.log('START DATE', startDate);
       const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`);
       const apods = response.data;
       apods.forEach(async (apod) => {
-        const updated = await APOD.create(apod);
-        const {
-          // eslint-disable-next-line camelcase
-          title, date, liked, url, hdurl, explanation, media_type, service_version,
-        } = updated;
-        await APOD.findOneAndUpdate(
-          apod,
-          {
-            title,
-            date,
-            liked,
-            url,
-            hdurl,
-            explanation,
-            media_type,
-            service_version,
-          },
-          {
-            new: true,
-            upsert: true,
-          },
-        );
+        let createdAPOD;
+        let updatedAPOD;
+        console.log('APOD APOD APOD', apod);
+        const found = await APOD.find({ date: apod.date });
+        console.log('FOUND', found);
+        const foundAPOD = found[0];
+        if (found.length === 0) {
+          console.log(`Found none, creating Apod with date of ${apod.date}`);
+          createdAPOD = await APOD.create(apod);
+          console.log(`Created APOD: ${createdAPOD}`);
+        } else {
+          console.log(`Found one created with date ${foundAPOD.date}, begin updating with props`);
+          updatedAPOD = await APOD.updateOne({ date: foundAPOD.date }, {
+            title: foundAPOD.title,
+            date: foundAPOD.date,
+            liked: foundAPOD.liked,
+            url: foundAPOD.url,
+            hdurl: foundAPOD.hdurl,
+            explanation: foundAPOD.explanation,
+            media_type: foundAPOD.media_type,
+            service_version: foundAPOD.service_version,
+          });
+          console.log(`UPDATE UPDATE UPDATE: ${updatedAPOD}`);
+          console.log(`Updated APOD with ${foundAPOD.date} to ${updatedAPOD.date} with property of liked being: ${updatedAPOD.liked}`);
+        }
       });
     } catch (err) {
       console.log('Error with getting APODS: ', err);
