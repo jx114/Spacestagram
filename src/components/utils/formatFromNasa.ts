@@ -1,6 +1,6 @@
 // @ts-ignore
 // #1
-import { TPhoto, NasaPhoto } from '../types.ts';
+import { TPhoto, NasaPhoto } from './types.ts';
 
 export default (input: NasaPhoto): TPhoto => ({
   // eslint-disable-next-line no-underscore-dangle

@@ -1,7 +1,10 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { ImageList } from '@mui/material';
 // @ts-ignore #1
-import { TPhoto, TPhotoList } from './types.ts';
+
+import { TPhoto, TPhotoList } from './types';
 // @ts-ignore #1
 import Photo from './Photo.tsx';
 
@@ -16,7 +19,7 @@ const PhotoList = (
     list, imageClick,
   }: TProps,
 ) => (
-  <ImageList cols={3} rowHeight="auto">
+  <ImageList cols={3} rowHeight="auto" style={{ margin: '5%' }}>
     {list.map((item: TPhoto) => (
       <Photo
         key={item.id}

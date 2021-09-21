@@ -4,19 +4,22 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, {
+  useState, useEffect, useMemo,
+} from 'react';
 import axios from 'axios';
-import { Container, Typography } from '@mui/material';
 import _ from 'lodash';
-
-import { NasaPhoto } from './types';
+import { Container, IconButton } from '@mui/material';
 
 // Components
 import PhotoList from './PhotoList';
 import ImageViewer from './ImageViewer';
+import Header from './Header';
+import Footer from './Footer';
 
 // Util
 import formatFromNasa from './utils/formatFromNasa';
+import { NasaPhoto } from './utils/types';
 
 export default function App() {
   const [list, setList] = useState([]);
@@ -24,8 +27,6 @@ export default function App() {
   const [activePhotoId, setActivePhotoId] = useState<string>('');
   const indexedPhotos = useMemo(() => _.keyBy(list, 'id'), [list]);
   const activePhoto = indexedPhotos[activePhotoId];
-  console.log('INDEXED PHOTOS', indexedPhotos);
-  console.log('ACTIVE PHOTO ACTIVE PHOTO', activePhoto);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -43,7 +44,6 @@ export default function App() {
   useEffect(getPhotos, []);
 
   const imageClick = (id: string) => {
-    console.log(`This is clicked id: ${id}, this is activePhotoId: ${activePhotoId}`);
     setActivePhotoId(id);
     handleOpen();
   };
@@ -54,7 +54,8 @@ export default function App() {
         ? (
           <>
             <Container maxWidth="lg">
-              <Typography variant="h2" className="title">Spacestagram</Typography>
+              <Header />
+              <IconButton sx={{ ml: 1 }} color="inherit" />
               {
                 activePhoto
                   ? (
@@ -72,6 +73,7 @@ export default function App() {
               <div className="list-card">
                 <PhotoList list={list} imageClick={imageClick} />
               </div>
+              <Footer />
             </Container>
           </>
         )
