@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import * as React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import {
   Box, Typography, ModalUnstyled, Container, Grid, styled, Snackbar, Alert,
@@ -17,9 +17,11 @@ const Backdrop = styled('div')`${backdrop}`;
 export default function ImageViewer({
   open, onClose, photo, getPhotos,
 }: any) {
-  console.log('PHOTO PHOTO', photo);
-  const [like, setLike] = React.useState(false);
-  const [snack, setSnack] = React.useState(false);
+  const {
+    title, details, copyright, hdPicture, date, id, liked,
+  } = photo;
+  const [year, month, day] = date.split('-');
+  const [snack, setSnack] = useState(false);
 
   const openSnack = () => {
     setSnack(true);
@@ -28,34 +30,16 @@ export default function ImageViewer({
     setSnack(false);
   };
 
-  const likeClick = (id: string) => {
-    if (like === true) {
-      setLike(false);
-      console.log('FALSE', like);
-    } else {
-      setLike(true);
-      console.log('TRUE', like);
-    }
-    const url = `/api/patchLikes/${id}`;
-    axios.patch(url, { liked: like })
-      .then((response) => {
-        console.log(response);
+  const likeClick = (_id: string) => {
+    const url = `/api/patchLikes/${_id}`;
+    axios.patch(url, { liked: !liked })
+      .then(() => {
+        getPhotos();
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   };
-
-  React.useEffect(getPhotos, [like]);
-
-  const {
-    title, details, copyright, hdPicture, date, id, liked,
-  } = photo;
-
-  const [year, month, day] = date.split('-');
-
-  console.log('STATE LIKED LIKED', like);
-  console.log('PHOTO LIKED LIKED', liked);
 
   return (
     <div>
@@ -101,16 +85,18 @@ export default function ImageViewer({
               </Grid>
               <Grid item xs={2}>
                 {
-                  like
-                    ? (<FavoriteIcon sx={{ color: 'red' }} onClick={() => (likeClick(id))} />)
-                    : (<FavoriteBorderIcon onClick={() => (likeClick(id))} />)
+                  liked
+                    ? (<FavoriteIcon sx={{ color: 'red', cursor: 'pointer' }} onClick={() => (likeClick(id))} />)
+                    : (<FavoriteBorderIcon sx={{ cursor: 'pointer' }} onClick={() => (likeClick(id))} />)
                 }
               </Grid>
               <Grid item xs={2}>
-                <ShareIcon onClick={() => {
-                  navigator.clipboard.writeText(hdPicture);
-                  openSnack();
-                }}
+                <ShareIcon
+                  style={{ cursor: 'copy' }}
+                  onClick={() => {
+                    navigator.clipboard.writeText(hdPicture);
+                    openSnack();
+                  }}
                 />
                 <Snackbar open={snack} autoHideDuration={3000} onClose={closeSnack}>
                   <Alert severity="info" onClose={closeSnack} sx={{ width: '100%' }}>
