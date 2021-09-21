@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const axios = require('axios');
 // eslint-disable-next-line import/extensions
 const APOD = require('../models/APOD');
@@ -18,15 +17,15 @@ module.exports = {
       const apods = response.data;
       apods.forEach(async (apod) => {
         let createdAPOD;
-        let updatedAPOD;
-        const [found] = await APOD.find({ date: apod.date });
-        if (found.length === 0) {
+        const foundArray = await APOD.find({ date: apod.date });
+        const found = foundArray[0];
+        if (foundArray.length === 0) {
           console.log(`Found none, creating Apod with date of ${apod.date}`);
           createdAPOD = await APOD.create(apod);
           console.log(`Created APOD: ${createdAPOD}`);
         } else {
           console.log(`Found one created with date ${found.date}, begin updating with props`);
-          updatedAPOD = await APOD.updateOne({ date: found.date }, {
+          await APOD.updateOne({ date: found.date }, {
             title: found.title,
             date: found.date,
             liked: found.liked,
@@ -36,7 +35,7 @@ module.exports = {
             media_type: found.media_type,
             service_version: found.service_version,
           }, { new: true });
-          console.log(`Updated APOD with ${found.date} to ${updatedAPOD.date} with property of liked being: ${updatedAPOD.liked}`);
+          console.log(`Updated APOD with ${found.date} to ${found.date} with property of liked being: ${found.liked}`);
         }
       });
     } catch (err) {
