@@ -4,9 +4,10 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Container, Typography } from '@mui/material';
+import _ from 'lodash';
 
 import { NasaPhoto } from './types';
 
@@ -20,7 +21,11 @@ import formatFromNasa from './utils/formatFromNasa';
 export default function App() {
   const [list, setList] = useState([]);
   const [open, setOpen] = useState(false);
-  const [activePhoto, setActivePhoto] = useState('');
+  const [activePhotoId, setActivePhotoId] = useState<string>('');
+  const indexedPhotos = useMemo(() => _.keyBy(list, 'id'), [list]);
+  const activePhoto = indexedPhotos[activePhotoId];
+  console.log('INDEXED PHOTOS', indexedPhotos);
+  console.log('ACTIVE PHOTO ACTIVE PHOTO', activePhoto);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -31,18 +36,18 @@ export default function App() {
         setList(formatted);
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   };
+
   useEffect(getPhotos, []);
+
   const imageClick = (id: string) => {
-    list.forEach((element: any) => {
-      if (id === element.id) {
-        setActivePhoto(element);
-      }
-    });
+    console.log(`This is clicked id: ${id}, this is activePhotoId: ${activePhotoId}`);
+    setActivePhotoId(id);
     handleOpen();
   };
+
   return (
     <div className="App">
       {list
@@ -59,6 +64,7 @@ export default function App() {
                       photo={activePhoto}
                       onOpen={handleOpen}
                       getPhotos={getPhotos}
+                      setActivePhotoId={setActivePhotoId}
                     />
                   )
                   : <></>
