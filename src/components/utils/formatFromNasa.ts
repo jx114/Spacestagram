@@ -12,4 +12,5 @@ export default (input: NasaPhoto): TPhoto => ({
   hdPicture: input.hdurl,
   details: input.explanation,
   type: input.media_type,
+  liked: input.liked,
 });

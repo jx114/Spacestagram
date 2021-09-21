@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 export type TPhoto = {
   id: number;
   title: string;
@@ -10,8 +12,15 @@ export type TPhoto = {
   type: string;
 };
 export type TPhotoList = {
-  list: TPhoto[];
+  list: TPhoto[] | null;
 };
+
+export type TModal = {
+  open: boolean;
+  ariaLabelledby: string;
+  ariaDescribedby: string;
+  children: ReactElement | ReactElement []
+}
 
 export type NasaPhoto = {
   copyright: string;

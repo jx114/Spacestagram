@@ -16,28 +16,27 @@ module.exports = {
       const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`);
       const apods = response.data;
       apods.forEach(async (apod) => {
-        const updated = await APOD.create(apod);
-        const {
-          // eslint-disable-next-line camelcase
-          title, date, liked, url, hdurl, explanation, media_type, service_version,
-        } = updated;
-        await APOD.findOneAndUpdate(
-          apod,
-          {
-            title,
-            date,
-            liked,
-            url,
-            hdurl,
-            explanation,
-            media_type,
-            service_version,
-          },
-          {
-            new: true,
-            upsert: true,
-          },
-        );
+        let createdAPOD;
+        let updatedAPOD;
+        const [found] = await APOD.find({ date: apod.date });
+        if (found.length === 0) {
+          console.log(`Found none, creating Apod with date of ${apod.date}`);
+          createdAPOD = await APOD.create(apod);
+          console.log(`Created APOD: ${createdAPOD}`);
+        } else {
+          console.log(`Found one created with date ${found.date}, begin updating with props`);
+          updatedAPOD = await APOD.updateOne({ date: found.date }, {
+            title: found.title,
+            date: found.date,
+            liked: found.liked,
+            url: found.url,
+            hdurl: found.hdurl,
+            explanation: found.explanation,
+            media_type: found.media_type,
+            service_version: found.service_version,
+          }, { new: true });
+          console.log(`Updated APOD with ${found.date} to ${updatedAPOD.date} with property of liked being: ${updatedAPOD.liked}`);
+        }
       });
     } catch (err) {
       console.log('Error with getting APODS: ', err);
@@ -56,15 +55,17 @@ module.exports = {
   },
   // Updating APODS' likes for persistent data
   patchLikes: async function patchLikes(req, res) {
-    const { _id, liked, title } = req.body;
-    try {
-      await APOD.findOneAndUpdate(
-        { _id },
-        { liked },
-      );
-      res.send(`Updated like on photo with the id:${_id} and title:${title}`);
-    } catch (err) {
-      res.json({ err });
-    }
+    const { liked } = req.body;
+    console.log('PATCH BODY', liked);
+    const { id } = req.params;
+    console.log('PATCH PARAMS', id);
+    APOD.updateOne(
+      { _id: id },
+      { liked },
+    ).then(() => {
+      res.send(`Updated like on photo with the id:${id}`);
+    }).catch(() => {
+      res.sendStatus(500);
+    });
   },
 };
