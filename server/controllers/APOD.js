@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const axios = require('axios');
 // eslint-disable-next-line import/extensions
 const APOD = require('../models/APOD');
