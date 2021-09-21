@@ -4,10 +4,12 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, {
+  useState, useEffect, useMemo,
+} from 'react';
 import axios from 'axios';
-import { Container } from '@mui/material';
 import _ from 'lodash';
+import { Container, IconButton } from '@mui/material';
 
 // Components
 import PhotoList from './PhotoList';
@@ -53,6 +55,7 @@ export default function App() {
           <>
             <Container maxWidth="lg">
               <Header />
+              <IconButton sx={{ ml: 1 }} color="inherit" />
               {
                 activePhoto
                   ? (

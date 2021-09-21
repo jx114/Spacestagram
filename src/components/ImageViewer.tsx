@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
-  Box, Typography, ModalUnstyled, Container, Grid, styled, Snackbar, Alert,
+  Box, Typography, ModalUnstyled, Container, Grid, styled, Snackbar, Alert, IconButton,
 } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -87,20 +87,24 @@ export default function ImageViewer({
                 </Typography>
               </Grid>
               <Grid item xs={2}>
-                {
-                  liked
-                    ? (<FavoriteIcon sx={{ color: 'red', cursor: 'pointer' }} onClick={() => (likeClick(id))} />)
-                    : (<FavoriteBorderIcon sx={{ cursor: 'pointer' }} onClick={() => (likeClick(id))} />)
-                }
+                <IconButton sx={{ ml: 1 }} color="inherit">
+                  {
+                    liked
+                      ? (<FavoriteIcon sx={{ color: 'red', cursor: 'pointer' }} onClick={() => (likeClick(id))} />)
+                      : (<FavoriteBorderIcon sx={{ cursor: 'pointer' }} onClick={() => (likeClick(id))} />)
+                  }
+                </IconButton>
               </Grid>
               <Grid item xs={2}>
-                <ShareIcon
-                  style={{ cursor: 'copy' }}
-                  onClick={() => {
-                    navigator.clipboard.writeText(hdPicture);
-                    openSnack();
-                  }}
-                />
+                <IconButton sx={{ ml: 1 }} color="inherit">
+                  <ShareIcon
+                    style={{ cursor: 'copy', color: '#6875EF' }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(hdPicture);
+                      openSnack();
+                    }}
+                  />
+                </IconButton>
                 <Snackbar open={snack} autoHideDuration={2000} onClose={closeSnack}>
                   <Alert severity="info" onClose={closeSnack} sx={{ width: '100%' }}>
                     Copied link to clipboard!
