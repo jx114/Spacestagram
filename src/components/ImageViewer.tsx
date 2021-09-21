@@ -52,14 +52,17 @@ export default function ImageViewer({
       >
         <Box sx={box}>
           <Container fixed maxWidth="md">
-            <img
-              src={`${hdPicture}`}
-              srcSet={hdPicture}
-              alt={title}
-              loading="lazy"
-              width="100%"
-              height="100%"
-            />
+            <div className="modal-image">
+              <img
+                src={`${hdPicture}`}
+                srcSet={hdPicture}
+                alt={title}
+                loading="lazy"
+                width="100%"
+                height="100%"
+                style={{ borderRadius: '15px' }}
+              />
+            </div>
             <Grid
               container
               direction="row"
@@ -98,7 +101,7 @@ export default function ImageViewer({
                     openSnack();
                   }}
                 />
-                <Snackbar open={snack} autoHideDuration={3000} onClose={closeSnack}>
+                <Snackbar open={snack} autoHideDuration={2000} onClose={closeSnack}>
                   <Alert severity="info" onClose={closeSnack} sx={{ width: '100%' }}>
                     Copied link to clipboard!
                   </Alert>
