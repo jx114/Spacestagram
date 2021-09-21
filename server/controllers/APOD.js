@@ -13,34 +13,30 @@ module.exports = {
   getAPODS: async function getAPODS() {
     try {
       const startDate = getStartDate();
-      console.log('START DATE', startDate);
       const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`);
       const apods = response.data;
       apods.forEach(async (apod) => {
         let createdAPOD;
         let updatedAPOD;
-        console.log('APOD APOD APOD', apod);
-        const found = await APOD.find({ date: apod.date });
-        console.log('FOUND', found);
-        const foundAPOD = found[0];
+        const [found] = await APOD.find({ date: apod.date });
         if (found.length === 0) {
           console.log(`Found none, creating Apod with date of ${apod.date}`);
           createdAPOD = await APOD.create(apod);
           console.log(`Created APOD: ${createdAPOD}`);
         } else {
-          console.log(`Found one created with date ${foundAPOD.date}, begin updating with props`);
-          updatedAPOD = await APOD.updateOne({ date: foundAPOD.date }, {
-            title: foundAPOD.title,
-            date: foundAPOD.date,
-            liked: foundAPOD.liked,
-            url: foundAPOD.url,
-            hdurl: foundAPOD.hdurl,
-            explanation: foundAPOD.explanation,
-            media_type: foundAPOD.media_type,
-            service_version: foundAPOD.service_version,
-          });
+          console.log(`Found one created with date ${found.date}, begin updating with props`);
+          updatedAPOD = await APOD.updateOne({ date: found.date }, {
+            title: found.title,
+            date: found.date,
+            liked: found.liked,
+            url: found.url,
+            hdurl: found.hdurl,
+            explanation: found.explanation,
+            media_type: found.media_type,
+            service_version: found.service_version,
+          }, { new: true });
           console.log(`UPDATE UPDATE UPDATE: ${updatedAPOD}`);
-          console.log(`Updated APOD with ${foundAPOD.date} to ${updatedAPOD.date} with property of liked being: ${updatedAPOD.liked}`);
+          console.log(`Updated APOD with ${found.date} to ${updatedAPOD.date} with property of liked being: ${updatedAPOD.liked}`);
         }
       });
     } catch (err) {
@@ -64,14 +60,13 @@ module.exports = {
     console.log('PATCH BODY', liked);
     const { id } = req.params;
     console.log('PATCH PARAMS', id);
-    try {
-      await APOD.findOneAndUpdate(
-        { id },
-        { liked },
-      );
+    APOD.updateOne(
+      { _id:id },
+      { liked },
+    ).then(() => {
       res.send(`Updated like on photo with the id:${id}`);
-    } catch (err) {
-      res.json({ err });
-    }
+    }).catch(() => {
+      res.sendStatus(500);
+    });
   },
 };
