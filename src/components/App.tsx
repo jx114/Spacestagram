@@ -4,9 +4,11 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { Container, Typography } from '@mui/material';
+import _ from 'lodash';
+
 import { NasaPhoto } from './types';
 
 // Components
@@ -19,8 +21,11 @@ import formatFromNasa from './utils/formatFromNasa';
 export default function App() {
   const [list, setList] = useState([]);
   const [open, setOpen] = useState(false);
-  // const [activePhoto, setActivePhoto] = useState('');
-
+  const [activePhotoId, setActivePhotoId] = useState<string>('');
+  const indexedPhotos = useMemo(() => _.keyBy(list, 'id'), [list]);
+  const activePhoto = indexedPhotos[activePhotoId];
+  console.log('INDEXED PHOTOS', indexedPhotos);
+  console.log('ACTIVE PHOTO ACTIVE PHOTO', activePhoto);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -31,17 +36,17 @@ export default function App() {
         setList(formatted);
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   };
+
   useEffect(getPhotos, []);
-  // eslint-disable-next-line no-unused-vars
+
   const imageClick = (id: string) => {
+    console.log(`This is clicked id: ${id}, this is activePhotoId: ${activePhotoId}`);
+    setActivePhotoId(id);
     handleOpen();
-    console.log(id);
   };
-  // const likeClick = (id: String) => {
-  // };
 
   return (
     <div className="App">
@@ -50,7 +55,20 @@ export default function App() {
           <>
             <Container maxWidth="lg">
               <Typography variant="h2" className="title">Spacestagram</Typography>
-              <ImageViewer open={open} onClose={handleClose} photo={list[0]} onOpen={handleOpen} />
+              {
+                activePhoto
+                  ? (
+                    <ImageViewer
+                      open={open}
+                      onClose={handleClose}
+                      photo={activePhoto}
+                      onOpen={handleOpen}
+                      getPhotos={getPhotos}
+                      setActivePhotoId={setActivePhotoId}
+                    />
+                  )
+                  : <></>
+              }
               <div className="list-card">
                 <PhotoList list={list} imageClick={imageClick} />
               </div>

@@ -10,8 +10,6 @@ export type TPhoto = {
   details: string;
   copyright: string;
   type: string;
-  handleClose: () => void;
-  imageClick: () => void;
 };
 export type TPhotoList = {
   list: TPhoto[] | null;
@@ -19,8 +17,6 @@ export type TPhotoList = {
 
 export type TModal = {
   open: boolean;
-  handleClose: () => void;
-  imageClick: () => void;
   ariaLabelledby: string;
   ariaDescribedby: string;
   children: ReactElement | ReactElement []

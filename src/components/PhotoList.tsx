@@ -8,7 +8,7 @@ import Photo from './Photo.tsx';
 export type TProps = {
   list: TPhotoList,
   // eslint-disable-next-line no-unused-vars
-  imageClick?: (id: string, imageId: string) => void,
+  imageClick?: (photo: TPhoto) => void,
 }
 
 const PhotoList = (

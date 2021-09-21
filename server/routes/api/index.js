@@ -4,6 +4,6 @@ const router = express.Router();
 const apodCtrl = require('../../controllers/APOD');
 
 router.get('/readAPODS', apodCtrl.readAPODS);
-router.post('/patchLikes', apodCtrl.patchLikes);
+router.patch('/patchLikes/:id', apodCtrl.patchLikes);
 
 module.exports = router;
