@@ -35,7 +35,6 @@ module.exports = {
             media_type: found.media_type,
             service_version: found.service_version,
           }, { new: true });
-          console.log(`UPDATE UPDATE UPDATE: ${updatedAPOD}`);
           console.log(`Updated APOD with ${found.date} to ${updatedAPOD.date} with property of liked being: ${updatedAPOD.liked}`);
         }
       });
@@ -61,7 +60,7 @@ module.exports = {
     const { id } = req.params;
     console.log('PATCH PARAMS', id);
     APOD.updateOne(
-      { _id:id },
+      { _id: id },
       { liked },
     ).then(() => {
       res.send(`Updated like on photo with the id:${id}`);
