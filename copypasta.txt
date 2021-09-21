@@ -1,43 +1,61 @@
- // const { id, title, date, liked, thumbnail, hdPicture, details, copyright, type } = photo;
-  const {
-    title, date, details, copyright, type, hdPicture,
-  } = photo;
-  // console.log('PROPS:', photo);
-  const [year, month, day] = date.split('-');
-  const imageSettings = {
-    height: '300',
-    width: '350',
-  };
-
-<div className="card">
-      <div className="card-image">
-        <img src={hdPicture} alt={type} width={imageSettings.width} height={imageSettings.height} />
-      </div>
-      <div className="card-text">
-        <div className="card-title">
-          {`${title} captured on: ${month}/${day}/${year}`}
-        </div>
-        <div className="card-details">
-          {details}
-        </div>
-        {
-          copyright
-            ? (
-              <div className="card-copyright">
-                {`© ${year} ${copyright} `}
-              </div>
-            )
-            : <></>
+try {
+      const startDate = getStartDate();
+      console.log('START DATE', startDate);
+      const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=2021-09-08`);
+      const apods = response.data;
+      apods.forEach(async (apod) => {
+        console.log('APOD APOD APOD', apod);
+        const { date } = apod;
+        console.log('DATE DATE DATE', date);
+        const found = await APOD.find({ date });
+        console.log('FOUND FOUND FOUND', found);
+        if (found === apod) {
+          console.log(`Found APOD with date:${date}, will not create a new one`);
+          await APOD.updateOne({ found }, { liked: false })
+            .catch((err) => (console.log(err)));
+        } else {
+          console.log(`Did not found APOD with date ${date}, will create a new one`);
+          await APOD.save(apod)
+            .catch((err) => (console.log(err)));
         }
-      </div>
-      <div className="like-button">
-        <button type="button">Like</button>
-      </div>
-    </div>
+      });
+    } catch (err) {
+      console.log('Error with getting APODS: ', err);
+    }
 
-<img
-          src={`${item.thumbnail}?w=164&h=164&fit=crop&auto=format`}
-          srcSet={`${item.thumbnail}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-          alt={item.title}
-          loading="lazy"
-        />
+
+getAPODS: async function getAPODS() {
+    try {
+      const startDate = getStartDate();
+      console.log('START DATE', startDate);
+      const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}`);
+      const apods = response.data;
+      apods.forEach(async (apod) => {
+        console.log('APOD APOD APOD', apod);
+        const updated = await APOD.create(apod);
+        const {
+          // eslint-disable-next-line camelcase
+          title, date, liked, url, hdurl, explanation, media_type, service_version,
+        } = updated;
+        await APOD.findOneAndUpdate(
+          apod,
+          {
+            title,
+            date,
+            liked,
+            url,
+            hdurl,
+            explanation,
+            media_type,
+            service_version,
+          },
+          {
+            new: true,
+            upsert: true,
+          },
+        );
+      });
+    } catch (err) {
+      console.log('Error with getting APODS: ', err);
+    }
+  },
