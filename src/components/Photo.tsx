@@ -21,6 +21,7 @@ const Photo = ({ photo, imageClick }: any) => {
         srcSet={`${thumbnail}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
         alt={title}
         loading="lazy"
+        style={{ cursor: 'pointer' }}
       />
     </ImageListItem>
   );
