@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const axios = require('axios');
 // eslint-disable-next-line import/extensions
 const APOD = require('../models/APOD');
@@ -19,8 +18,9 @@ module.exports = {
       apods.forEach(async (apod) => {
         let createdAPOD;
         let updatedAPOD;
-        const [found] = await APOD.find({ date: apod.date });
-        if (found.length === 0) {
+        const foundArray = await APOD.find({ date: apod.date });
+        const found = foundArray[0];
+        if (foundArray.length === 0) {
           console.log(`Found none, creating Apod with date of ${apod.date}`);
           createdAPOD = await APOD.create(apod);
           console.log(`Created APOD: ${createdAPOD}`);
