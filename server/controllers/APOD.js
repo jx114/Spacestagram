@@ -17,7 +17,6 @@ module.exports = {
       const apods = response.data;
       apods.forEach(async (apod) => {
         let createdAPOD;
-        let updatedAPOD;
         const foundArray = await APOD.find({ date: apod.date });
         const found = foundArray[0];
         if (foundArray.length === 0) {
@@ -26,7 +25,7 @@ module.exports = {
           console.log(`Created APOD: ${createdAPOD}`);
         } else {
           console.log(`Found one created with date ${found.date}, begin updating with props`);
-          updatedAPOD = await APOD.updateOne({ date: found.date }, {
+          await APOD.updateOne({ date: found.date }, {
             title: found.title,
             date: found.date,
             liked: found.liked,
@@ -36,7 +35,7 @@ module.exports = {
             media_type: found.media_type,
             service_version: found.service_version,
           }, { new: true });
-          console.log(`Updated APOD with ${found.date} to ${updatedAPOD.date} with property of liked being: ${updatedAPOD.liked}`);
+          console.log(`Updated APOD with ${found.date} to ${found.date} with property of liked being: ${found.liked}`);
         }
       });
     } catch (err) {
