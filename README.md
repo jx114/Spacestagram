@@ -11,12 +11,14 @@ A gallery of NASA's Astronomy Picture of the Day, allows for viewing that update
 1. [Requirements](#requirements)
 1. [Installing Dependencies](#installing-dependencies)
 
+
 ## Motivation
 > This is Shopify's Front End Developer Intern Challenge - Winter 2022, even though the requirment was for front-end only, I wanted to make a deployed full-stack application because I really enjoy working with data and backend system designs.
 > I also wanted to challenge myself further by using a language(Typescript) that I was unfamiliar with and also with a concept(React Hooks) that I did not really touch until now. I opted for a more minimalistic design because the contrast between the darkness in space and the white plain background really highlights the pictures.
 > One of my main motivation is that I was really glad that the API is astronomy related because I have always had a fascination with outer space and one of my life goals is to live in space and to observe Earth and if I am lucky enough, I would be writing software whilst in space.
 
 ## Demo
+[Check out the website!](https://ec2-54-183-206-15.us-west-1.compute.amazonaws.com/)
 ![](https://media2.giphy.com/media/zT5UG1ZAPvmTZxC0sz/giphy.gif?cid=790b76113866cc584d0564f3111c08ede5b508c1281bb89e&rid=giphy.gif&ct=g)
 
 ## Tech
