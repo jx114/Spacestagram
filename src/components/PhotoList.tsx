@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { ImageList } from '@mui/material';
 // @ts-ignore #1

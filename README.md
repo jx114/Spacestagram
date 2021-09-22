@@ -67,5 +67,21 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser an
 
 ### `npm build`
 
+### `make deploy`
+
+Deploy with Skaffold, requires
+- Docker
+- gcloud SDK
+- Skaffold
+
+```bash
+$ gcloud auth application-default login
+$ make deploy
+```
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for autopilot-cluster-1.
+PS C:\Users\Andy\Documents\workspace\spacestagram> skaffold run --default-repo=gcr.io/spacestagram-326720
+
 [](https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)
 [Link to LinkedIn](https://www.linkedin.com/in/jacky-xia-8aa261161//)
+

@@ -1,0 +1,11 @@
+apiVersion: skaffold/v2beta23
+kind: Config
+build:
+  artifacts:
+    - image: gcr.io/spacestagram-326720/client
+      docker:
+        dockerfile: client.Dockerfile
+    - image: gcr.io/spacestagram-326720/server
+      docker:
+        dockerfile: server.Dockerfile
+  local: {}

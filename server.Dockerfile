@@ -13,4 +13,4 @@ RUN npm install react-scripts -g
 
 COPY . .
 
-CMD ["npm", "run", "dockerStart"]
+CMD ["npm", "run", "server"]
