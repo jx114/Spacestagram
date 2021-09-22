@@ -4,12 +4,13 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-COPY package*.json ./
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY package.json ./
 
 RUN npm install
+RUN npm install react-scripts -g
 
 COPY . .
-
-RUN npm run build
 
 CMD ["npm", "run", "dockerStart"]
