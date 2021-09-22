@@ -43,14 +43,14 @@ A gallery of NASA's Astronomy Picture of the Day, allows for viewing that update
 
 
 ## Features
-* Mobile first UI built using Material UI and React consists of podcast search and browsing, item detail page with full episode content s
-* Dynamic modal viewer for each photo to display details of each photo
-* Persistent likes via on-click functionality through `MongoDB`
-* Modularized components
-* Containerized with Docker and deployed on AWS
-* Photos chosen via on-click functionality
-* Photo source links shared
-
+* Mobile first UI built using Material UI and React consists of image viewing, modal popup, alerts, sharing/likes.
+* Dynamic modal viewer for each photo to display details of each photo.
+* Persistent likes via on-click functionality through `MongoDB`.
+* Modularized components.
+* Containerized with Docker and deployed on AWS.
+* Photos chosen via on-click functionality.
+* Photo source links shared.
+* Updates on every new day with a new photo.
 
 ## Available Scripts
 
