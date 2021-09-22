@@ -4,7 +4,7 @@ const path = require('path');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+require('dotenv').config();
 const controllers = require('./controllers/APOD');
 const router = require('./routes/api/index');
 
@@ -12,7 +12,8 @@ const { getAPODS } = controllers;
 
 const app = express();
 const port = 3017;
-const url = 'mongodb://localhost/spacestagram';
+console.log('ENV VARIABLE', process.env.CONNECTIONSTRING);
+const url = process.env.CONNECTIONSTRING || 'mongodb://localhost/spacestagram';
 
 // Database
 /// / import and clean

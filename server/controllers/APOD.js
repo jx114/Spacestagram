@@ -1,12 +1,11 @@
 const axios = require('axios');
-// eslint-disable-next-line import/extensions
 const APOD = require('../models/APOD');
+require('dotenv').config();
 
 // Utils
-// eslint-disable-next-line import/extensions
 const getStartDate = require('../utils');
 
-const apiKey = 'X5YJg98pmuUMEC5tAn385uwvfDX50lID0eqIkubk';
+const apiKey = process.env.REACT_APP_NASA_API_KEY;
 
 module.exports = {
   // Getting APODS from nasaAPI

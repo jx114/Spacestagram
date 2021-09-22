@@ -14,11 +14,12 @@ A gallery of NASA's Astronomy Picture of the Day, allows for viewing that update
 
 ## Motivation
 > This is Shopify's Front End Developer Intern Challenge - Winter 2022, even though the requirment was for front-end only, I wanted to make a deployed full-stack application because I really enjoy working with data and backend system designs.
-> I also wanted to challenge myself further by using a language(Typescript) that I was unfamiliar with and also with a concept(React Hooks) that I did not really touch until now. I opted for a more minimalistic design because the contrast between the darkness in space and the white plain background really highlights the pictures.
-> One of my main motivation is that I was really glad that the API is astronomy related because I have always had a fascination with outer space and one of my life goals is to live in space and to observe Earth and if I am lucky enough, I would be writing software whilst in space.
+* I also wanted to challenge myself further by using a language(Typescript) that I was unfamiliar with and also with a concept(React Hooks) that I did not really touch until now. I opted for a more minimalistic design because the contrast between the darkness in space and the white plain background really highlights the pictures.
+* One of my main motivation is that I was really glad that the API is astronomy related because I have always had a fascination with outer space and one of my life goals is to live in space and to observe Earth and if I am lucky enough, I would be writing software whilst in space.
+* In order to keep myself on track, I used [Trello](https://trello.com/b/oYen6r6L/spacestagram) a ticketing system to track my progress and ensure I continue to output work at a timely matter
 
 ## Demo
-[Check out the website!](https://ec2-54-183-206-15.us-west-1.compute.amazonaws.com/)
+[Check out the website!](http://ec2-3-101-72-37.us-west-1.compute.amazonaws.com/)
 ![](https://media2.giphy.com/media/zT5UG1ZAPvmTZxC0sz/giphy.gif?cid=790b76113866cc584d0564f3111c08ede5b508c1281bb89e&rid=giphy.gif&ct=g)
 
 ## Tech
@@ -66,8 +67,9 @@ Runs the app and server with [concurrently](https://www.npmjs.com/package/concur
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser and server [http://localhost:3017](http://localhost:3017).
 
 ### `npm test`
-
+WIP
 ### `npm build`
+Runs the app in production.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser).
 
-[](https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)
-[Link to LinkedIn](https://www.linkedin.com/in/jacky-xia-8aa261161//)
+[LinkedIn](https://www.linkedin.com/in/jacky-xia-8aa261161//)
