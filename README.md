@@ -21,7 +21,7 @@ A gallery of NASA's Astronomy Picture of the Day, allows for viewing that update
 * Front End
   * [React](https://reactjs.org/)
   * [TypeScript](https://www.typescriptlang.org/)
-  * [Material UI](https://mui.com/)for UI styling
+  * [Material UI](https://mui.com/) for UI styling
   * [Axios](https://www.npmjs.com/package/axios) to connect to the API
 * Backend
   * [MongoDB](https://www.mongodb.com/) & [Mongoose](https://mongoosejs.com/)
