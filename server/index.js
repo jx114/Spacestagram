@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 // Routes
 app.get('/', (req, res) => {
-  res.send(';-; not rendering!');
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.use('/api', router);
