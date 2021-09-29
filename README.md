@@ -19,7 +19,7 @@ A gallery of NASA's Astronomy Picture of the Day, allows for viewing that update
 * In order to keep myself on track, I used [Trello](https://trello.com/b/oYen6r6L/spacestagram) a ticketing system to track my progress and ensure I continue to output work at a timely matter
 
 ## Demo
-[Check out the website!](http://ec2-3-101-72-37.us-west-1.compute.amazonaws.com/)
+[Check out the website!](http://ec2-54-219-138-150.us-west-1.compute.amazonaws.com/)
 ![](https://media2.giphy.com/media/zT5UG1ZAPvmTZxC0sz/giphy.gif?cid=790b76113866cc584d0564f3111c08ede5b508c1281bb89e&rid=giphy.gif&ct=g)
 
 ## Tech
