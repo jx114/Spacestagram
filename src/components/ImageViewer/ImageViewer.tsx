@@ -8,7 +8,7 @@ import {
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import styles from './utils/styles';
+import styles from '../utils/styles';
 
 const { box, modal, backdrop } = styles;
 const Modal = styled(ModalUnstyled)`${modal}`;

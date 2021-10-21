@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageListItem } from '@mui/material';
 // Types
 // @ts-ignore #1
-import { TPhoto } from './utils/types.ts';
+import { TPhoto } from '../../utils/types.ts';
 
 const Photo = ({ photo, imageClick }: TPhoto) => {
   // const { id, title, date, liked, thumbnail, hdPicture, details, copyright, type } = photo;

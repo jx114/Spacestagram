@@ -6,7 +6,7 @@ import { ImageList } from '@mui/material';
 
 import { TPhoto, TPhotoList } from './types';
 // @ts-ignore #1
-import Photo from './Photo.tsx';
+import Photo from './Photo';
 
 export type TProps = {
   list: TPhotoList,
