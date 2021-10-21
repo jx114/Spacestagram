@@ -13,9 +13,9 @@ import { Container, IconButton } from '@mui/material';
 
 // Components
 import PhotoList from './PhotoList';
-import ImageViewer from './ImageViewer/ImageViewer';
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
+import ImageViewer from './ImageViewer';
+import Header from './Header';
+import Footer from './Footer';
 
 // Util
 import formatFromNasa from './utils/formatFromNasa';
