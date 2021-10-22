@@ -55,11 +55,61 @@ A gallery of NASA's Astronomy Picture of the Day, allows for viewing that update
 * Photo source links shared.
 * Updates on every new day with a new photo.
 
+## Directory
+```bash
+├── Dockerfile
+├── README.md
+├── docker-compose.yml
+├── package-lock.json
+├── package.json
+├── build
+│   ├── asset-manifest.json
+│   ├── index.html
+│   └── static
+│       ├── css
+│       ├── js
+│       └── media
+├── public
+│   └── index.html
+├── server
+│   ├── controllers
+│   │   └── APOD.js
+│   ├── index.js
+│   ├── models
+│   │   └── APOD.js
+│   ├── routes
+│   │   └── api
+│   │       └── index.js
+│   └── utils
+│       └── index.js
+├── specs
+├── src
+│   ├── components
+│   │   ├── App.tsx
+│   │   ├── Footer
+│   │   │   └── Footer.tsx
+│   │   ├── Header
+│   │   │   └── Header.tsx
+│   │   ├── ImageViewer
+│   │   │   └── ImageViewer.tsx
+│   │   ├── PhotoList
+│   │   │   ├── Photo
+│   │   │   │   └── index.tsx
+│   │   │   └── index.tsx
+│   │   └── utils
+│   │       ├── formatFromNasa.ts
+│   │       ├── styles.ts
+│   │       └── types.ts
+│   ├── index.tsx
+│   └── react-app-env.d.ts
+└── tsconfig.json
+```
 ## Available Scripts
 
 ## Install Dependencies
-### `npm install`
 In the project directory, you can run:
+
+### `npm install`
 
 ### `npm start`
 
