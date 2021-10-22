@@ -56,6 +56,7 @@ A gallery of NASA's Astronomy Picture of the Day, allows for viewing that update
 * Updates on every new day with a new photo.
 
 ## Directory
+```bash
 ├── Dockerfile
 ├── README.md
 ├── docker-compose.yml
@@ -102,7 +103,7 @@ A gallery of NASA's Astronomy Picture of the Day, allows for viewing that update
 │   ├── index.tsx
 │   └── react-app-env.d.ts
 └── tsconfig.json
-
+```
 ## Available Scripts
 
 ## Install Dependencies

@@ -4,9 +4,8 @@ const styles = {
     top: '50%',
     left: '47%',
     transform: 'translate(-50%, -30%)',
-    // 'min-height': '90vh',
     width: '90%',
-    bgcolor: 'rgb(166,166,166, .9)',
+    bgcolor: 'rgb(0,0,0, .5)',
     boxShadow: 24,
     p: 4,
     margin: '50px',
@@ -30,7 +29,7 @@ const styles = {
   bottom: 0;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.85);
   -webkit-tap-highlight-color: transparent;`,
 };
 

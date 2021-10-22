@@ -13,7 +13,7 @@ const { getAPODS } = controllers;
 const app = express();
 const port = 3017;
 console.log('ENV VARIABLE', process.env.CONNECTIONSTRING);
-const url = 'mongodb://localhost/spacestagram';
+const url = process.env.CONNECTIONSTRING || 'mongodb://localhost/spacestagram';
 
 // Database
 /// / import and clean
