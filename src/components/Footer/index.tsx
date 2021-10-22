@@ -23,7 +23,7 @@ const Footer = () => (
           <img src="https://img.icons8.com/fluency/48/000000/github.png" alt="" />
         </a>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <Typography variant="h5" className="footer-copyright">{`Jacky Xia © ${year}`}</Typography>
       </Grid>
     </Grid>

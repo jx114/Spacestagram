@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import React, { useState } from 'react';
@@ -49,21 +51,23 @@ export default function ImageViewer({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         BackdropComponent={Backdrop}
+        disableEnforceFocus
       >
         <Box sx={box}>
-          <Container fixed maxWidth="md">
+          <Container>
             <div className="modal-image">
               <img
+                style={{ borderRadius: '15px', display: 'block' }}
                 src={`${hdPicture}`}
                 srcSet={hdPicture}
                 alt={title}
                 loading="lazy"
-                width="100%"
                 height="100%"
-                style={{ borderRadius: '15px' }}
+                width="100%"
+                max-width="95px"
               />
             </div>
-            <Grid
+            {/* <Grid
               container
               direction="row"
               justifyContent="flex-start"
@@ -132,7 +136,7 @@ export default function ImageViewer({
                     : <></>
                 }
               </Grid>
-            </Grid>
+            </Grid> */}
           </Container>
         </Box>
       </Modal>
